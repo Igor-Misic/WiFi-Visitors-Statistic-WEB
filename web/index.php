@@ -3,7 +3,7 @@
 include 'database_config.php';
 include 'menu.php';
 $counter = 1;
-echo "<img align=\"center\" width = 60% src=http://cromish.com:81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M>";
+echo "<img align=\"center\" width = 60% src=http://cromish.com:81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M&tz=Europe%2FZagreb>";
 echo 
 "<table align=\"left\">
 	<tr>
@@ -52,39 +52,69 @@ if ($result = $conn->query("SELECT * FROM wifi_online_users")) {
 		echo "<tr><td>".$counter."</td>";
 		echo "<td>".$nick_name."</td>";
 		echo "<td>".$device."</td>";
-			
-		if(isset($_GET["cro521391"])) {
-			echo "<td>".$macAddress."</td>";
-		}
 		echo "</tr>";
 		
 		$counter++;
 	}	
 echo "</table>";
 echo "<br><br>";
-echo "<img align=\"left\" width=100% src=http://cromish.com:81/render/?width=1920&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-168hours&title=7%20days>";
+echo "<img align=\"left\" width=100% src=http://cromish.com:81/render/?width=1920&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-168hours&title=7%20days&tz=Europe%2FZagreb>";
 }
 else echo "Can't SELECT";
 
-$userTime = "userTime";
+$userTime = "menu";
 // total time
 echo "<br><table class=$userTime align=\"left\">
 	<tr>
 		<th class=$userTime>No:</th>
 		<th class=$userTime>Nick:</th>
-		<th class=$userTime>Total time:</th>
-		<th class=$userTime>Today</th>
-		<th class=$userTime>Yesterday</th>
-		<th class=$userTime>Day before yesterday</th>
-		<th class=$userTime>Three days ago</th>
-		<th class=$userTime>Four days ago</th>
-		<th class=$userTime>Five days ago</th>
-		<th class=$userTime>Six days ago</th>
-		<th class=$userTime>Seven days ago</th>
+		<th class=$userTime><a href=\"?day=total\">Total time</a></th>
+		<th class=$userTime><a href=\"?day=day0\">Today</a></th>
+		<th class=$userTime><a href=\"?day=day1\">Yesterday</a></th>
+		<th class=$userTime><a href=\"?day=day2\">Two days ago</a></th>
+		<th class=$userTime><a href=\"?day=day3\">Three days ago</a></th>
+		<th class=$userTime><a href=\"?day=day4\">Four days ago</a></th>
+		<th class=$userTime><a href=\"?day=day5\">Five days ago</a></th>
+		<th class=$userTime><a href=\"?day=day6\">Six days ago</a></th>
+		<th class=$userTime><a href=\"?day=day7\">Seven days ago</a></th>
 	</tr>";
 	
 $counter = 1;
-if ($result = $conn->query("SELECT * FROM user_time ORDER BY (totalSpentTime+0) DESC")) {
+
+// switch prevent SQL injection
+$orderBy = "totalSpentTime";
+
+switch ($_GET["day"]) {
+    case "total":
+        $orderBy = "totalSpentTime";
+        break;
+    case "day0":
+        $orderBy = "day0";
+        break;
+    case "day1":
+        $orderBy = "day1";
+        break;
+	case "day2":
+        $orderBy = "day2";
+        break;
+	case "day3":
+        $orderBy = "day3";
+        break;
+	case "day4":
+        $orderBy = "day4";
+        break;
+	case "day5":
+        $orderBy = "day5";
+        break;
+	case "day6":
+        $orderBy = "day6";
+        break;
+	case "day7":
+        $orderBy = "day6";
+        break;
+		
+}
+if ($result = $conn->query("SELECT * FROM user_time ORDER BY ($orderBy+0) DESC")) {
 	while ($row=$result->fetch_row())
 	{	
 		$macAddress = $row[1];
