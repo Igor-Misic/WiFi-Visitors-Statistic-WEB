@@ -1,0 +1,77 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+
+CREATE TABLE IF NOT EXISTS login_data (
+  id int(11) NOT NULL,
+  username varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS preshared_key (
+  id int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  psk varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS user_time (
+  id int(11) NOT NULL,
+  macAddress varchar(100) DEFAULT NULL,
+  totalSpentTime int(11) DEFAULT NULL,
+  day0 int(11) DEFAULT NULL,
+  day1 int(11) DEFAULT NULL,
+  day2 int(11) DEFAULT NULL,
+  day3 int(11) DEFAULT NULL,
+  day4 int(11) DEFAULT NULL,
+  day5 int(11) DEFAULT NULL,
+  day6 int(11) DEFAULT NULL,
+  day7 int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS wifi_online_users (
+  id int(11) NOT NULL,
+  macAddress varchar(100) DEFAULT NULL,
+  userName varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS wifi_registered_users (
+  id int(11) NOT NULL,
+  macAddress varchar(100) DEFAULT NULL,
+  userName varchar(100) DEFAULT NULL,
+  device varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE login_data
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE preshared_key
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE user_time
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE wifi_online_users
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE wifi_registered_users
+  ADD PRIMARY KEY (id);
+
+
+ALTER TABLE login_data
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE preshared_key
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE user_time
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE wifi_online_users
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE wifi_registered_users
+  MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
