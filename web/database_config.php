@@ -1,6 +1,7 @@
 <?php
+//those are fake data, don't be naive
 $host='127.0.0.1';
-$dbUsername='hacklabos';
+$dbUsername='hacklabos'; 
 $dbPassword='rU8toorqFmjeVwLIgnW7';
 $dbName='hacklabos';
 $conn = new mysqli($host, $dbUsername, $dbPassword, $dbName);
