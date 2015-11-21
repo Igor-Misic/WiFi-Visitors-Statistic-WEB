@@ -2,6 +2,7 @@
 <?php
 include 'database_config.php';
 include 'menu.php';
+
 $counter = 1;
 echo "<img align=\"center\" width = 60% src=http://cromish.com:81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M&tz=Europe%2FZagreb>";
 echo 
@@ -9,8 +10,12 @@ echo
 	<tr>
 		<th>No:</th>
 		<th>Nick:</th>
-		<th>WiFi card company:</th>
-	</tr>";
+		<th>WiFi card company:</th>";
+if (admin())
+{
+	echo "<th>Mac Address:</th>";
+}
+echo "	</tr>";
 	
 	
 	
@@ -19,6 +24,34 @@ $curl = curl_init();
 
 $device = "";
 
+function checkTokenCookie($password)
+{
+        if(isset($_COOKIE["TOKEN"]) and isset($_COOKIE["TIME"])) 
+        {       $token = $_COOKIE["TOKEN"];
+                $time = $_COOKIE["TIME"];
+                $calculated_token = hash_hmac ('sha1', $time, $password);
+                if ($calculated_token === $token) return true;
+        }
+        else return false;
+}
+
+function admin()
+{
+	if (!isset($_COOKIE["TOKEN"])) return;
+	$username = $_COOKIE["USERNAME"];
+	global $conn;
+	$result = $conn->query("SELECT password FROM login_data WHERE username = '$username'");
+
+	if ($result->num_rows > 0) {
+		// output data of each row
+		while($row = $result->fetch_assoc()) {
+			$password = $row["password"];  
+		}
+	} else {
+		echo "No username in table<br>";
+	}
+	return checkTokenCookie($password);
+}
 
 if ($result = $conn->query("SELECT * FROM wifi_online_users")) {
 	while ($row=$result->fetch_row())
@@ -48,10 +81,13 @@ if ($result = $conn->query("SELECT * FROM wifi_online_users")) {
 				$device = $obj[0]->{'company'};
 			}
 		}
-		
 		echo "<tr><td>".$counter."</td>";
 		echo "<td>".$nick_name."</td>";
 		echo "<td>".$device."</td>";
+		if (admin())
+		{
+			echo "<td>".$macAddress."</td>";
+		}
 		echo "</tr>";
 		
 		$counter++;
@@ -83,7 +119,7 @@ $counter = 1;
 
 // switch prevent SQL injection
 $orderBy = "totalSpentTime";
-
+if (!isset($_GET["day"])) $_GET["day"] = '';
 switch ($_GET["day"]) {
     case "total":
         $orderBy = "totalSpentTime";
