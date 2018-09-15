@@ -1,7 +1,7 @@
 ## WiFi-Visitors-Statistic-WEB
 live web: http://bigbrother.hacklabos.org/
 
-For this project you will also need graphite and carbone (https://github.com/graphite-project).
+For this project you will also need Graphite and Carbon (https://github.com/graphite-project).
 
 ### Setup WEB server on ubutnu:
 
@@ -37,4 +37,5 @@ Now you shall be able to see the page but without graphs.
 
 http://127.0.0.1/WiFi-Visitors-Statistic-WEB/web/index.php
 
-## Setup Graphite and Carbone
+## Setup Graphite and Carbon
+With Graphite, you don't need to take care of saving data into the database and to take care of data. You just need to send it to Carbon and read it with Graphite.
