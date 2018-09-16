@@ -37,17 +37,22 @@ Now you shall be able to see the page but without graphs.
 
 http://127.0.0.1/WiFi-Visitors-Statistic-WEB/web/index.php
 
-## Setup Graphite and Carbon
+## Setup Graphite and Carbon (docker version)
 With Graphite, you don't need to take care of saving data into the database and to take care of data. You just need to send it to Carbon and read it with Graphite.
 
-Install it with:
+Do instructions:
 
 
 ```
-sudo apt-get install graphite-web graphite-carbon
-
+cd /opt/
+sudo mkdir tmp
+cd tmp
+sudo git clone https://github.com/graphite-project/graphite-web.git
+sudo git clone https://github.com/graphite-project/carbon.git
+sudo git clone https://github.com/graphite-project/whisper.git
+sudo git clone https://github.com/graphite-project/ceres.git
 ```
-Setup will ask you to delete graphite-carbon. You shall select "No". 
+
 
 ```
 sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
