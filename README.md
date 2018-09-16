@@ -39,3 +39,30 @@ http://127.0.0.1/WiFi-Visitors-Statistic-WEB/web/index.php
 
 ## Setup Graphite and Carbon
 With Graphite, you don't need to take care of saving data into the database and to take care of data. You just need to send it to Carbon and read it with Graphite.
+
+Install it with:
+
+
+```
+sudo apt-get install graphite-web graphite-carbon
+
+```
+Setup will ask you to delete graphite-carbon. You shall select "No". 
+
+```
+sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
+```
+
+Inside  `/etc/apache2/sites-available/apache2-graphite.conf` change `<VirtualHost *:80>` to `/<VirtualHost *:81>`.
+
+And add port `Listen 81` to together with `Listen 80` with 
+
+`sudo nano  /etc/apache2/ports.conf `
+
+```
+Listen 80
+Listen 80
+```
+
+
+
