@@ -68,6 +68,7 @@ sudo rm -rf tmp
 
 ```
 sudo cp /opt/graphite/examples/init.d/* /etc/init.d/
+sudo chmod 775 /etc/init.d/carbon-*
 sudo cp /opt/graphite/examples/example-graphite-vhost.conf /etc/apache2/sites-available/apache2-graphite.conf
 ```
 
@@ -80,8 +81,6 @@ And add port `Listen 81` to together with `Listen 80` with
 ```
 Listen 80
 Listen 81
-
-```
 Run following commands to install proper lib for apache to run graphite. And then reload all configs.
 
 ```
