@@ -61,8 +61,7 @@ cd ..
 cd ceres/
 sudo python setup.py install
 cd whisper/
-cd ..
-cd ..
+cd ../..
 sudo rm -rf tmp
 ```
 
