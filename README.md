@@ -70,7 +70,7 @@ sudo rm -rf tmp
 sudo cp /opt/graphite/examples/example-graphite-vhost.conf /etc/apache2/sites-available/apache2-graphite.conf
 ```
 
-Inside  `/etc/apache2/sites-available/apache2-graphite.conf` change `<VirtualHost *:80>` to `/<VirtualHost *:81>`.
+Inside  `/etc/apache2/sites-available/apache2-graphite.conf` change `<VirtualHost *:80>` to `/<VirtualHost *:81>` and also `WSGISocketPrefix run/wsgi` to `WSGISocketPrefix /var/run/apache2/wsgi`,
 
 And add port `Listen 81` to together with `Listen 80` with 
 
@@ -90,6 +90,12 @@ systemctl reload apache2
 ```
 
 Set carbon to run after system reboot. Replace ` CARBON_CACHE_ENABLED=false` with ` CARBON_CACHE_ENABLED=true`
+
+#### Setup config files
+
+```
+sudo cp /opt/graphite/conf/graphite.wsgi.example /opt/graphite/conf/graphite.wsgi
+```
 
 ```
 sudo nano /etc/default/graphite-carbon
