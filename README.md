@@ -67,7 +67,7 @@ sudo rm -rf tmp
 
 
 ```
-sudo cp /usr/share/graphite-web/apache2-graphite.conf /etc/apache2/sites-available
+sudo cp /opt/graphite/examples/example-graphite-vhost.conf /etc/apache2/sites-available/apache2-graphite.conf
 ```
 
 Inside  `/etc/apache2/sites-available/apache2-graphite.conf` change `<VirtualHost *:80>` to `/<VirtualHost *:81>`.
