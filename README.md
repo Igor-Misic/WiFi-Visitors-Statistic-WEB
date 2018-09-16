@@ -72,5 +72,12 @@ sudo a2ensite apache2-graphite
 systemctl reload apache2
 ```
 
+Set carbon to run after system reboot. Replace ` CARBON_CACHE_ENABLED=false` with ` CARBON_CACHE_ENABLED=true`
+
+```
+sudo nano /etc/default/graphite-carbon
+```
+
+
 
 
