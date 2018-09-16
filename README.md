@@ -51,6 +51,19 @@ sudo git clone https://github.com/graphite-project/graphite-web.git
 sudo git clone https://github.com/graphite-project/carbon.git
 sudo git clone https://github.com/graphite-project/whisper.git
 sudo git clone https://github.com/graphite-project/ceres.git
+
+cd graphite-web/
+sudo python setup.py install
+cd ..
+cd carbon/
+sudo python setup.py install
+cd ..
+cd ceres/
+sudo python setup.py install
+cd whisper/
+cd ..
+cd ..
+sudo rm -rf tmp
 ```
 
 
