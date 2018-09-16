@@ -67,10 +67,11 @@ sudo rm -rf tmp
 
 
 ```
+sudo cp /opt/graphite/examples/init.d/* /etc/init.d/
 sudo cp /opt/graphite/examples/example-graphite-vhost.conf /etc/apache2/sites-available/apache2-graphite.conf
 ```
 
-Inside  `/etc/apache2/sites-available/apache2-graphite.conf` change `<VirtualHost *:80>` to `/<VirtualHost *:81>` and also `WSGISocketPrefix run/wsgi` to `WSGISocketPrefix /var/run/apache2/wsgi`,
+Inside  `/etc/apache2/sites-available/apache2-graphite.conf` change `<VirtualHost *:80>` to `/<VirtualHost *:81>` and also `WSGISocketPrefix run/wsgi` to `WSGISocketPrefix /var/run/apache2/wsgi`.
 
 And add port `Listen 81` to together with `Listen 80` with 
 
