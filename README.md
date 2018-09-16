@@ -64,5 +64,10 @@ Listen 80
 Listen 81
 ```
 
+```
+sudo a2ensite apache2-graphite
+systemctl reload apache2
+```
+
 
 
