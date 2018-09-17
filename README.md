@@ -97,6 +97,10 @@ Set carbon to run after system reboot. Replace ` CARBON_CACHE_ENABLED=false` wit
 
 ```
 sudo cp /opt/graphite/conf/graphite.wsgi.example /opt/graphite/conf/graphite.wsgi
+sudo cp /opt/graphite/conf/relay-rules.conf.example /opt/graphite/conf/relay-rules.conf
+sudo cp /opt/graphite/conf/storage-aggregation.conf.example /opt/graphite/conf/storage-aggregation.conf
+sudo cp /opt/graphite/conf/storage-schemas.conf.example /opt/graphite/conf/storage-schemas.conf
+sudo cp /opt/graphite/conf/carbon.conf.example /opt/graphite/conf/carbon.conf
 ```
 
 ```
