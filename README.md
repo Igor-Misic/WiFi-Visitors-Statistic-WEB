@@ -9,7 +9,7 @@ For this project you will also need Graphite and Carbon (https://github.com/grap
 sudo apt-get install apache2
 sudo apt-get install php
 sudo apt-get install mysql-server
-apt-get install php-mysqlnd
+apt-get install php-mysqlnd php-curl
 ```
 With `sudo nano /etc/apache2/sites-available/000-default.conf ` replace `/var/www/html` with `/var/www`
 
