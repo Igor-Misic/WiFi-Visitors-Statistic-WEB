@@ -37,8 +37,14 @@ Now you shall be able to see the page but without graphs.
 
 http://127.0.0.1/WiFi-Visitors-Statistic-WEB/web/index.php
 
-## Setup Graphite and Carbon (docker version)
+## Setup Graphite and Carbon
+I can't install graphite to Ubuntu 18.04 I have some problems. So this need to be done.
+
+
+
 With Graphite, you don't need to take care of saving data into the database and to take care of data. You just need to send it to Carbon and read it with Graphite.
+
+It should go something like this:
 
 Do instructions:
 
