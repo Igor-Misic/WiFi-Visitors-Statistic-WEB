@@ -3,7 +3,7 @@
 #cron setup: * * * * * /scripts/update_wifi_users_status.sh
 
 URL="http://hacklabos.org/wifi/insert_mac_address_api.php?"
-KEY="" #must be same as on WEB page
+KEY="" #must be same in SQL base, example: KEY="avasd83jfdajjw"
 DATE=$(date +"%s")
 
 USERS=""
