@@ -73,17 +73,18 @@ if ($result = $conn->query("SELECT * FROM wifi_online_users"))
                 $device = $row_wifi_users[3];
             else 
             {
-                // Set some options - we are passing in a useragent too here
-                curl_setopt_array($curl, array(
-                    CURLOPT_RETURNTRANSFER => 1,
-                    CURLOPT_URL => 'http://www.macvendorlookup.com/api/v2/{'.$macAddress.'}',
-                    CURLOPT_USERAGENT => 'Codular Sample cURL Request'
-                ));
-                // Send the request & save response to $resp
-                $json = curl_exec($curl);
-                $obj = json_decode($json);
-                
-                $device = $obj[0]->{'company'};
+                $url = 'https://api.macvendors.com/'.$macAddress;
+                                $ch = curl_init();
+                                curl_setopt($ch, CURLOPT_URL, $url);
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                                try
+                {
+                    $device = curl_exec($ch);
+                }
+                catch (Exception $e) 
+                {
+                        $device = "macvendors API error";
+                }
             }
         }
         echo "<tr><td>".$counter."</td>";
@@ -105,11 +106,15 @@ else echo "Can't SELECT";
 
 $userTime = "menu";
 // total time
-echo "<br><table class=$userTime align=\"left\">
+echo "<br><table class=\"$userTime history\" align=\"left\">
     <tr>
         <th class=$userTime>No:</th>
-        <th class=$userTime>Nick:</th>
-        <th class=$userTime><a href=\"?day=total\">Total time</a></th>
+        <th class=$userTime>Nick:</th>";
+if (admin())
+{
+    echo "<th>MAC</th>";
+}
+echo "  <th class=$userTime><a href=\"?day=total\">Total time</a></th>
         <th class=$userTime><a href=\"?day=day0\">Today</a></th>
         <th class=$userTime><a href=\"?day=day1\">Yesterday</a></th>
         <th class=$userTime><a href=\"?day=day2\">Two days ago</a></th>
@@ -152,7 +157,7 @@ switch ($_GET["day"])
         $orderBy = "day6";
         break;
     case "day7":
-        $orderBy = "day6";
+        $orderBy = "day7";
         break;
         
 }
@@ -176,61 +181,75 @@ if ($result = $conn->query("SELECT * FROM user_time ORDER BY ($orderBy+0) DESC")
             if ($row_wifi_users[2] != "")
                 $nick_name = $row_wifi_users[2];
             else
-                $nick_name = "Gost";
+                $nick_name = "Skip";
         }
+
+        if (isset($_GET["showGuests"]))
+        {
+            $nick_name = "Guest";
+        } 
         
-        echo "<tr><td class=$userTime>".$counter."</td>";
-        echo "<td class=$userTime>".$nick_name."</td>";
-        if ($totalTime >= 60 and $totalTime < 1440 )
-            echo "<td class=$userTime>".((int)($totalTime/60))."h ".($totalTime%60)."min</td>";
-        else if ($totalTime >= 1440)
-            echo "<td class=$userTime>".((int)($totalTime/1440))."d ".((int)(($totalTime%1440)/60))."h ".($totalTime%60)."min</td>";
-        else 
-            echo "<td class=$userTime>".$totalTime." min</td>";
+        if (("Skip" != $nick_name)) 
+        {
+            echo "<tr><td class=$userTime>".$counter."</td>";
+            echo "<td class=$userTime>".$nick_name."</td>";
+
+            if (admin())
+            {
+                    echo "<td>".$macAddress."</td>";
+            }
             
-        //day0
-        if ($day0 >= 60)
-            echo "<td class=$userTime>".((int)($day0/60))."h ".($day0%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day0." min</td>\n";
-        //day1
-        if ($day1 >= 60)
-            echo "<td class=$userTime>".((int)($day1/60))."h ".($day1%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day1." min</td>\n";
-        //day2
-        if ($day2 >= 60)
-            echo "<td class=$userTime>".((int)($day2/60))."h ".($day2%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day2." min</td>\n";
-        //day3
-        if ($day3 >= 60)
-            echo "<td class=$userTime>".((int)($day3/60))."h ".($day3%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day3." min</td>\n";    
-        //day4
-        if ($day4 >= 60)
-            echo "<td class=$userTime>".((int)($day4/60))."h ".($day4%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day4." min</td>\n";    
-        //day5
-        if ($day5 >= 60)
-            echo "<td class=$userTime>".((int)($day5/60))."h ".($day5%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day5." min</td>\n";    
-        //day6
-        if ($day6 >= 60)
-            echo "<td class=$userTime>".((int)($day6/60))."h ".($day6%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day6." min</td>\n";    
-        //day7
-        if ($day7 >= 60)
-            echo "<td class=$userTime>".((int)($day7/60))."h ".($day7%60)."min</td>\n";
-        else     
-            echo "<td class=$userTime>".$day7." min</td>\n";    
-        echo "</tr>";
-        
-        $counter++;
+            if ($totalTime >= 60 and $totalTime < 1440 )
+                echo "<td class=$userTime>".((int)($totalTime/60))."h ".($totalTime%60)."min</td>";
+            else if ($totalTime >= 1440)
+                echo "<td class=$userTime>".((int)($totalTime/1440))."d ".((int)(($totalTime%1440)/60))."h ".($totalTime%60)."min</td>";
+            else 
+                echo "<td class=$userTime>".$totalTime." min</td>";
+                
+            //day0
+            if ($day0 >= 60)
+                echo "<td class=$userTime>".((int)($day0/60))."h ".($day0%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day0." min</td>\n";
+            //day1
+            if ($day1 >= 60)
+                echo "<td class=$userTime>".((int)($day1/60))."h ".($day1%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day1." min</td>\n";
+            //day2
+            if ($day2 >= 60)
+                echo "<td class=$userTime>".((int)($day2/60))."h ".($day2%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day2." min</td>\n";
+            //day3
+            if ($day3 >= 60)
+                echo "<td class=$userTime>".((int)($day3/60))."h ".($day3%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day3." min</td>\n";    
+            //day4
+            if ($day4 >= 60)
+                echo "<td class=$userTime>".((int)($day4/60))."h ".($day4%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day4." min</td>\n";    
+            //day5
+            if ($day5 >= 60)
+                echo "<td class=$userTime>".((int)($day5/60))."h ".($day5%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day5." min</td>\n";    
+            //day6
+            if ($day6 >= 60)
+                echo "<td class=$userTime>".((int)($day6/60))."h ".($day6%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day6." min</td>\n";    
+            //day7
+            if ($day7 >= 60)
+                echo "<td class=$userTime>".((int)($day7/60))."h ".($day7%60)."min</td>\n";
+            else     
+                echo "<td class=$userTime>".$day7." min</td>\n";    
+            echo "</tr>";
+            
+            $counter++;
+        }
     }
     echo "</table>";    
 }
