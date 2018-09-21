@@ -4,7 +4,7 @@ include 'database_config.php';
 include 'menu.php';
 
 $counter = 1;
-echo "<img align=\"center\" width = 60% src=http://cromish.com:81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M&tz=Europe%2FZagreb>";
+echo "<img align=\"center\" width = 60% src=http://".$_SERVER['SERVER_NAME'].":81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M&tz=Europe%2FZagreb>";
 echo 
 "<table align=\"left\">
     <tr>
@@ -100,7 +100,7 @@ if ($result = $conn->query("SELECT * FROM wifi_online_users"))
     }    
 echo "</table>";
 echo "<br><br>";
-echo "<img align=\"left\" width=100% src=http://cromish.com:81/render/?width=1920&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-168hours&title=7%20days&tz=Europe%2FZagreb>";
+echo "<img align=\"left\" width=100% src=http://".$_SERVER['SERVER_NAME'].":81/render/?width=1920&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-168hours&title=7%20days&tz=Europe%2FZagreb>";
 }
 else echo "Can't SELECT";
 
@@ -181,12 +181,12 @@ if ($result = $conn->query("SELECT * FROM user_time ORDER BY ($orderBy+0) DESC")
             if ($row_wifi_users[2] != "")
                 $nick_name = $row_wifi_users[2];
             else
-                $nick_name = "Skip";
+                $nick_name = "Guest";
         }
 
-        if (isset($_GET["showGuests"]))
+        if (!isset($_GET["showGuests"]) && "Guest" === $nick_name)
         {
-            $nick_name = "Guest";
+            $nick_name = "Skip";
         } 
         
         if (("Skip" != $nick_name)) 
@@ -198,7 +198,7 @@ if ($result = $conn->query("SELECT * FROM user_time ORDER BY ($orderBy+0) DESC")
             {
                     echo "<td>".$macAddress."</td>";
             }
-            
+
             if ($totalTime >= 60 and $totalTime < 1440 )
                 echo "<td class=$userTime>".((int)($totalTime/60))."h ".($totalTime%60)."min</td>";
             else if ($totalTime >= 1440)
