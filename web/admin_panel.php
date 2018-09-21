@@ -36,7 +36,7 @@ function checkTokenCookie($password)
 {
     if(isset($_COOKIE["TOKEN"]) and isset($_COOKIE["TIME"])) 
     {   
-		$token = $_COOKIE["TOKEN"];
+        $token = $_COOKIE["TOKEN"];
         $time = $_COOKIE["TIME"];
         $calculated_token = hash_hmac ('sha1', $time, $password);
         if ($calculated_token === $token) return true;
@@ -73,16 +73,12 @@ if (isset($_POST["Save"]))
                 }
                 else 
                 {
-                    // Set some options - we are passing in a useragent too here
-                    curl_setopt_array($curl, array(
-                        CURLOPT_RETURNTRANSFER => 1,
-                        CURLOPT_URL => 'http://www.macvendorlookup.com/api/v2/{'.$macAddress.'}',
-                        CURLOPT_USERAGENT => 'Codular Sample cURL Request'
-                    ));
-                    // Send the request & save response to $resp
-                    $json = curl_exec($curl);
-                    $obj = json_decode($json);
-                    $device = $obj[0]->{'company'};
+                    sleep(10);
+                    $url = "https://api.macvendors.com/".$macAddress;
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $device = curl_exec($ch);
                 }
             }
             
@@ -133,13 +129,10 @@ if (isset($_POST["username"]) OR isset($_COOKIE["TOKEN"]))
 
         if ($result->num_rows > 0) {
             // output data of each row
-			while($row = $result->fetch_assoc()) 
-			{
+            while($row = $result->fetch_assoc()) {
                 $password = $row["password"];
             }
-		} 
-		else 
-		{
+        } else {
             echo "No username in table<br>";
         }
 
