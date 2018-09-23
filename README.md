@@ -3,6 +3,9 @@ live web: http://bigbrother.hacklabos.org/
 
 For this project you will also need Graphite and Carbon (https://github.com/graphite-project).
 
+### Architecture
+![](https://lh3.googleusercontent.com/s0ulMG73Ch20P3DT7rSqzv7T0wEPM8GPvyGnSG1pb4aFblsfW_OAFyhGUcFMNZt-KeeAsbQWqiS5tNRcE-un80APgCO_4keVbyUDm9Al4vU41nEBMtRqD7Xpy34yOOZCFlXAXhN1Kmao1MZB6PIkCZ2sCAJc8bAoptaccDtfcqpFN6Fp1MyDmfnI1nO8ApuHkPOmvVX7cctR0IYEOj7zpWdu4hYJWp9fiZFW0nGL4MvNwm4Rjn1lpYaSJFs22zs0Hen3mAYQ4Z52RwNfS-mTEoVAuRgyPXj8x-W_x5Cr0lI4FGJDWAixqSAlS4FDmpnhq2uU_3Lnp67t9myuZeqmzvvIl4uqYfMy4zxw_bBVmjizc8J_cSOAYn-5mskt-JSLTLVMjJjTd0qVq9eVlcAN-X_0wySs6SgntgBxEFoakCIIOu4ntIWR_Mjrc5XuBXjn82DxEtQF9T8iK4g8fgryruc6IdIQUiqz6YHdG-Q2kPk_D8Rj2V0N5lFMLDWd40PE3YErhIXlVvnqaeuogEvwZc0_KYjHrWNY-e7jGpP2Mu_RBJXAQfTuCzb_bN0As9ubqyApM06D1VYpE8GMEGLYtEHpiB7zF9n-mQNwbT77-wbOpbV4JrMbkNYiM-Esb-wnjcawpK-YVT1y8s-EW9L8XFbwMkaojvt8zMl5Dfc0gt8sA-U8IIvIwp0=w700-h501-no)
+
 ### Setup WEB server on ubutnu:
 
 ```
