@@ -40,7 +40,7 @@ Now you shall be able to see the page but without graphs.
 
 http://127.0.0.1/WiFi-Visitors-Statistic-WEB/web/index.php
 
-## Setup Graphite and Carbon
+## Setup Graphite and Carbon TODO: This need to fix, it is broken.
 I can't install graphite to Ubuntu 18.04 I have some problems. So this need to be done.
 
 
