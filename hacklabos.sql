@@ -8,7 +8,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS login_data (
   id int(11) NOT NULL,
-  username varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -45,6 +45,14 @@ CREATE TABLE IF NOT EXISTS wifi_registered_users (
   userName varchar(100) DEFAULT NULL,
   device varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE IF NOT EXISTS smart_lock_log (
+  ID int NOT NULL AUTO_INCREMENT,
+  `user` varchar(100) NOT NULL,
+  dt DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 
 ALTER TABLE login_data

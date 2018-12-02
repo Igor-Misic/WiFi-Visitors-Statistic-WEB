@@ -19,7 +19,8 @@ echo
 "<table  class=menu >
     <tr>
         <td width=15%><b><a href=\"index.php\">Home</a></b></td>
-        <td width=15%><b><a href=\"admin_panel.php\">Admin</a></b></td>   
+        <td width=15%><b><a href=\"admin_panel.php\">Admin</a></b></td>
+        <td width=15%><b><a href=\"smart_lock_log.php\">Smart lock</a></b></td>   
         $checkBoxMenuHtml
         <td width=60%></td>";
         
