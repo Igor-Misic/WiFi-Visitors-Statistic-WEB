@@ -40,6 +40,14 @@ Now you shall be able to see the page but without graphs.
 
 http://127.0.0.1/WiFi-Visitors-Statistic-WEB/web/index.php
 
+## Adding Administrator for admin page
+
+username -> plain text, example: hacklabos
+password -> md5 hashed password example: md5(this is password ) -> djniu32rzfh23iuhui5hrhf23
+
+INSERT INTO login_data VALUES (1, 'hacklabos', 'djniu32rzfh23iuhui5hrhf23');
+
+
 ## Setup Graphite and Carbon TODO: This need to fix, it is broken.
 I can't install graphite to Ubuntu 18.04 I have some problems. So this need to be done.
 
