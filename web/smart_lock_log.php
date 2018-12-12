@@ -19,13 +19,14 @@ if ($result = $conn->query("SELECT * FROM smart_lock_log ORDER BY (ID+0) DESC"))
         $id = $row[0];
         $user = $row[1];
         $date = $row[2];
-    }
+    
 
-    echo "<tr><td>".$id."</td>";
-    echo "<td>".$user."</td>";
-    echo "<td>".$date."</td>";
-    echo "</tr>";
-    echo "</table>";    
+        echo "<tr><td>".$id."</td>";
+        echo "<td>".$user."</td>";
+        echo "<td>".$date."</td>";
+        echo "</tr>";
+    }
+        echo "</table>";    
 }
 else echo "Can't SELECT";
 
