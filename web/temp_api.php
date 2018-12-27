@@ -1,6 +1,7 @@
 <?php
 // API for collecting MAC addresses
 include 'database_config.php';
+include 'update_carbon.php';
 
 //key must be same as in bash script
 $result = $conn->query("SELECT psk FROM preshared_key WHERE name='api_psk'");
@@ -34,6 +35,9 @@ if(strcmp($calculated_validator,$validator) === 0)
     }
 
     $temp = $_GET["temp"];
+    
+    updateCarbon("hacklab.temp", $temp);
+    
     if ($conn->query("UPDATE temp SET temp='$temp', ts=current_timestamp WHERE id =1") === TRUE) 
     {
         echo "New record created successfully<br>";
