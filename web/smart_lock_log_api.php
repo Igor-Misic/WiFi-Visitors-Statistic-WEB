@@ -5,15 +5,15 @@ include 'database_config.php';
 //key must be same as in bash script
 $result = $conn->query("SELECT psk FROM preshared_key WHERE name='api_psk'");
 
-if ($result->num_rows > 0) 
+if ($result->num_rows > 0)
 {
     // output data of each row
-    while($row = $result->fetch_assoc()) 
+    while($row = $result->fetch_assoc())
     {
         $key = $row["psk"];
     }
-} 
-else 
+}
+else
 {
     echo "0 results";
 }
@@ -26,24 +26,26 @@ $totalSpentTime = '';
 
 $calculated_validator = hash_hmac ('sha1', $date, $key);
 
-if(strcmp($calculated_validator,$validator) === 0)
+if(!is_string($validator) || strlen($validator) < 1)
 {
-    if ($conn->connect_errno) 
+    echo "We don't take kindly of your kind around here! <br>";
+}
+elseif(strcmp($calculated_validator,$validator) === 0)
+{
+    if ($conn->connect_errno)
     {
       exit('Can\'t connect : '. $conn->connect_error);
     }
 
     $user = $_GET["user"];
-    if ($conn->query("INSERT INTO smart_lock_log (user) VALUES ('$user')") === TRUE) 
+    if ($conn->query("INSERT INTO smart_lock_log (user) VALUES ('$user')") === TRUE)
     {
         echo "New record created successfully<br>";
-        
-    } 
-    else 
+    }
+    else
     {
         echo "Error: INSERT INTO smart_lock_log (user) VALUES ('$user') <br>" . $conn->error."<br>";
     }
-
 }
 else echo "Validator is wrong";
 
