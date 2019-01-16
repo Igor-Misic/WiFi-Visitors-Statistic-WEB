@@ -21,7 +21,7 @@ else
 
 $validator = $_GET["validator"];
 $date = $_GET["date"];
-$temp = "";
+$temperature = "";
 
 $totalSpentTime = '';
 
@@ -38,18 +38,18 @@ elseif(strcmp($calculated_validator,$validator) === 0)
       exit('Can\'t connect : '. $conn->connect_error);
     }
 
-    $temp = $_GET["temp"];
+    $temperature = $_GET["temperature"];
 
-    updateCarbon("hacklab.temp", $temp);
+    updateCarbon("hacklab.temperature", $temperature);
 
-    if ($conn->query("UPDATE temp SET temp='$temp', ts=current_timestamp WHERE id =1") === TRUE)
+    if ($conn->query("UPDATE temperature SET temperature='$temperature', ts=current_timestamp WHERE id =1") === TRUE)
     {
         echo "New record created successfully<br>";
 
     }
     else
     {
-        echo "UPDATE temp SET temp='$temp' WHERE id = 1 <br>" . $conn->error."<br>";
+        echo "UPDATE temperature SET temperature='$temperature' WHERE id = 1 <br>" . $conn->error."<br>";
     }
 
 }

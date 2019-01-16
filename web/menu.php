@@ -1,22 +1,41 @@
+<style>
+.hover_img { 
+  position:relative;  
+}
+.hover_img a span { 
+  position:absolute; 
+  display:none; 
+  z-index:99;
+  left:50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.hover_img a:hover span { 
+  display:block;
+}
+</style>
+
 <?php
 
-$temp;
+$temperature;
 $timeStamp;
+$server = $_SERVER['PHP_SELF'];
 
 function get_temp()
 {
 
-    global $temp;
+    global $temperature;
     global $timeStamp;
     global $conn;
 
-    $result = $conn->query("SELECT temp, ts FROM temp WHERE id = 1");
+    $result = $conn->query("SELECT temperature, ts FROM temperature WHERE id = 1");
 
     if ($result->num_rows > 0) 
     {
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            $temp = $row["temp"];  
+            $temperature = $row["temperature"];  
             $timeStamp = $row["ts"];
         }
     } 
@@ -42,7 +61,12 @@ else
     </form>";
 }
 
+
+$temperatureImageLink = "http://".$_SERVER['SERVER_NAME'].":81/render/?width=586&height=308&_salt=1545851943.431&yMin=0&yMax=50&from=-168hours&title=Lab%20temperature&target=hacklab.temperature";
+
 get_temp();
+
+$temperatureHtml = "<div class=\"hover_img\"><a href=\"#\">".$temperature."&#8451; <span><img src=".$temperatureImageLink." alt=\"image\" height=\"300\" /></span></a></div>";
 
 echo 
 "<table  class=menu >
@@ -51,8 +75,8 @@ echo
         <td width=15%><b><a href=\"admin_panel.php\">Admin</a></b></td>
         $checkBoxMenuHtml
         <td width=15%><b><a href=\"smart_lock_log.php\">Smart lock</a></b></td>
-        <td width=5%><b>".$temp." &#8451;</b></td>
-        <td width=30%></td>
+        <td width=10%><b>".$temperatureHtml."</b></td>
+        <td width=15%></td>
         <td width=10%>".$timeStamp."</td>";
         
 //if (isset($_COOKIE["TOKEN"])) 

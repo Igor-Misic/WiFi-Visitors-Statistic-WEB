@@ -53,14 +53,14 @@ CREATE TABLE IF NOT EXISTS smart_lock_log (
   PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS temp (   
+CREATE TABLE IF NOT EXISTS temperature (   
   ID int NOT NULL AUTO_INCREMENT,   
-  `temp` varchar(100) NOT NULL,   
+  `temperature` varchar(100) NOT NULL,   
   ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
   PRIMARY KEY (ID) 
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO temp (temp) VALUES (0);
+INSERT INTO temperature (temperature) VALUES (0);
 
 
 
