@@ -41,12 +41,14 @@ Now you shall be able to see the page but without graphs.
 http://127.0.0.1/WiFi-Visitors-Statistic-WEB/web/index.php
 
 ## Adding Administrator for admin page
+example: 
+username: hacklabos
+password: labpass
 
+username is plain text,  example: hacklabos
+pasword is md5 hashed, example: md5(labpass) -> djniu32rzfh23iuhui5hrhf23
 
-username -> plain text, example: hacklabos
-
-password -> md5 hashed password, example: md5(this is password ) -> djniu32rzfh23iuhui5hrhf23
-
+Inserting example into MySQL database.
 ```
 mysql>  INSERT INTO login_data VALUES (1, 'hacklabos', 'djniu32rzfh23iuhui5hrhf23');
 ```
