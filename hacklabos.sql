@@ -48,6 +48,7 @@ CREATE TABLE IF NOT EXISTS wifi_registered_users (
 
 CREATE TABLE IF NOT EXISTS smart_lock_log (
   ID int NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
   `user` varchar(100) NOT NULL,
   ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (ID)

@@ -20,6 +20,7 @@ else
 
 $validator = $_GET["validator"];
 $date = $_GET["date"];
+$user_id = "";
 $user = "";
 
 $totalSpentTime = '';
@@ -37,14 +38,15 @@ elseif(strcmp($calculated_validator,$validator) === 0)
       exit('Can\'t connect : '. $conn->connect_error);
     }
 
+    $user_id = $_GET["id"];
     $user = $_GET["user"];
-    if ($conn->query("INSERT INTO smart_lock_log (user) VALUES ('$user')") === TRUE)
+    if ($conn->query("INSERT INTO smart_lock_log (user_id, user) VALUES ('$user_id', '$user')") === TRUE)
     {
         echo "New record created successfully<br>";
     }
     else
     {
-        echo "Error: INSERT INTO smart_lock_log (user) VALUES ('$user') <br>" . $conn->error."<br>";
+        echo "Error: INSERT INTO smart_lock_log (user_id, user) VALUES ('$user_id', '$user') <br>" . $conn->error."<br>";
     }
 }
 else echo "Validator is wrong";
