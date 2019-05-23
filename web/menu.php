@@ -18,6 +18,8 @@
 
 <?php
 
+//include 'access_log.php';
+
 $temperature;
 $timeStamp;
 $server = $_SERVER['PHP_SELF'];
@@ -76,7 +78,8 @@ echo
         $checkBoxMenuHtml
         <td width=15%><b><a href=\"smart_lock_log.php\">Smart lock</a></b></td>
         <td width=10%><b>".$temperatureHtml."</b></td>
-        <td width=15%></td>
+        <td width=10%><b><a href=\"show_image.php\">Camera</a></b></td>
+        <td width=5%></td>
         <td width=10%>".$timeStamp."</td>";
         
 //if (isset($_COOKIE["TOKEN"])) 
