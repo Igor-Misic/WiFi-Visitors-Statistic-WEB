@@ -4,21 +4,15 @@
 include 'database_config.php';
 include 'menu.php';
 include 'admin_functions.php';
+include 'login_form.php';
 
 // Get cURL resource
 $curl = curl_init();
 
 if (!isset($_POST["Submit"]) && !isset($_POST["Save"]) && !isset($_POST["new_nick"]) && !isset($_COOKIE["TOKEN"]))
-echo "
-<form action=\"\" method=\"POST\">
-Username:<br>
-<input type=\"text\" name=\"username\">
-<br>
-Password:<br>
-<input type=\"password\" name=\"password\">
-<br>
-<input type=\"submit\" name=\"Submit\">
-</form>";
+{
+	loginForm();
+}
 
 if (isset($_POST["Save"]))
 {
