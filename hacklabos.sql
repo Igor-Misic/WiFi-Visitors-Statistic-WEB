@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS login_data (
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*! Make key same as one in bash script for uploading mac addresses  */;
+/* Make key same as one in bash script for uploading mac addresses  */
 CREATE TABLE IF NOT EXISTS preshared_key (
   id int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
