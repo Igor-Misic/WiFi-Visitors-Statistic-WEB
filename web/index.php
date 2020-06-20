@@ -3,8 +3,11 @@
 include 'database_config.php';
 include 'menu.php';
 
+$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+
+
 $counter = 1;
-echo "<img align=\"center\" width = 60% src=http://".$_SERVER['SERVER_NAME'].":81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M&tz=Europe%2FZagreb>";
+echo "<img align=\"center\" width = 60% src=".$protocol.$_SERVER['SERVER_NAME'].":81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M&tz=Europe%2FZagreb&colorList=%23145a32>";
 echo 
 "<table align=\"left\">
     <tr>
@@ -77,8 +80,9 @@ if ($result = $conn->query("SELECT * FROM wifi_online_users"))
                                 $ch = curl_init();
                                 curl_setopt($ch, CURLOPT_URL, $url);
                                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                                try
+                try
                 {
+                    usleep(800000);
                     $device = curl_exec($ch);
                 }
                 catch (Exception $e) 
@@ -100,7 +104,7 @@ if ($result = $conn->query("SELECT * FROM wifi_online_users"))
     }    
 echo "</table>";
 echo "<br><br>";
-echo "<img align=\"left\" width=100% src=http://".$_SERVER['SERVER_NAME'].":81/render/?width=1920&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-168hours&title=7%20days&tz=Europe%2FZagreb>";
+echo "<img align=\"left\" width=100% src=".$protocol.$_SERVER['SERVER_NAME'].":81/render/?width=1920&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-168hours&title=7%20days&tz=Europe%2FZagreb&colorList=%23145a32>";
 }
 else echo "Can't SELECT";
 

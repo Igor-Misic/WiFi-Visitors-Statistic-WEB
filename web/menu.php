@@ -24,6 +24,8 @@ $temperature;
 $timeStamp;
 $server = $_SERVER['PHP_SELF'];
 
+$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+
 function get_temp()
 {
 
@@ -64,7 +66,7 @@ else
 }
 
 
-$temperatureImageLink = "http://".$_SERVER['SERVER_NAME'].":81/render/?width=586&height=308&_salt=1545851943.431&yMin=0&yMax=50&from=-168hours&title=Lab%20temperature&target=hacklab.temperature";
+$temperatureImageLink = $protocol.$_SERVER['SERVER_NAME'].":81/render/?width=586&height=308&_salt=1545851943.431&yMin=0&yMax=50&from=-168hours&title=Lab%20temperature&target=hacklab.temperature";
 
 get_temp();
 
