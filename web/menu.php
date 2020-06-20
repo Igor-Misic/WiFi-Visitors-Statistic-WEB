@@ -24,7 +24,7 @@ $temperature;
 $timeStamp;
 $server = $_SERVER['PHP_SELF'];
 
-$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
 function get_temp()
 {

@@ -3,8 +3,7 @@
 include 'database_config.php';
 include 'menu.php';
 
-$protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
-
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
 $counter = 1;
 echo "<img align=\"center\" width = 60% src=".$protocol.$_SERVER['SERVER_NAME'].":81/render/?width=1100&height=308&vtitle=Broj%20WiFi%20uredaja&target=hacklab.LabOS&yMin=0&yStep=2&from=-24hours&title=24%20hours&xFormat=%25H%3A%25M&tz=Europe%2FZagreb&colorList=%23145a32>";
