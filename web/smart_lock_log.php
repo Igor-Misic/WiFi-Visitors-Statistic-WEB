@@ -5,6 +5,7 @@ include 'menu.php';
 include 'admin_functions.php';
 include 'login_form.php';
 
+$conn = openDbConn();
 
 if (true === isUserLogged())
 {

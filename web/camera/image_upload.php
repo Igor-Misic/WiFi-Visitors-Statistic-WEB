@@ -1,32 +1,10 @@
 <?php
-include '../database_config.php';
+include_once '../database_config.php';
+include_once '../api/auth_handler.php';
 
-//key must be same as in bash script
-$result = $conn->query("SELECT psk FROM preshared_key WHERE name='api_psk'");
+$verified =  isVerified();
 
-if ($result->num_rows > 0)
-{
-    // output data of each row
-    while($row = $result->fetch_assoc())
-    {
-        $key = $row["psk"];
-    }
-}
-else
-{
-    echo "0 results";
-}
-
-$validator = $_POST["validator"];
-$date = $_POST["date"];
-
-$calculated_validator = hash_hmac ('sha1', $date, $key);
-
-if(!is_string($validator) || strlen($validator) < 1)
-{
-    echo "We don't take kindly of your kind around here! <br>";
-}
-elseif(strcmp($calculated_validator,$validator) === 0)
+if($verified)
 {
 
     $uploaddir = $_SERVER['DOCUMENT_ROOT'].'camera/image/';

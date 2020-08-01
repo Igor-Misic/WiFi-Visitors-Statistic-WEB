@@ -52,7 +52,7 @@ function isUserLogged() {
 		}
 		else echo "No username value!";
 
-		global $conn;
+		$conn = openDbConn();
 		$result = $conn->query("SELECT password FROM login_data WHERE username = '$username'");
 
 		if ($result->num_rows > 0) {
@@ -73,6 +73,8 @@ function isUserLogged() {
 		{
 			echo "Wrong password!";
 		}
+
+		$conn->close();
 	}
 
 	return $retValue;

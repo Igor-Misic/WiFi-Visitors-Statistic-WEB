@@ -41,7 +41,7 @@ function admin()
 {
     if (!isset($_COOKIE["TOKEN"])) return;
     $username = $_COOKIE["USERNAME"];
-    global $conn;
+    $conn = openDbConn();
     $result = $conn->query("SELECT password FROM login_data WHERE username = '$username'");
 
     if ($result->num_rows > 0) 
@@ -56,8 +56,11 @@ function admin()
         echo "No username in table<br>";
     }
     return checkTokenCookie($password);
+
+    $conn->close();
 }
 
+$conn = openDbConn();
 if ($result = $conn->query("SELECT * FROM wifi_online_users")) 
 {
     while ($row=$result->fetch_row())

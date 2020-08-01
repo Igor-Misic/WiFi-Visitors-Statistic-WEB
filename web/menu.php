@@ -28,10 +28,9 @@ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVE
 
 function get_temp()
 {
-
     global $temperature;
     global $timeStamp;
-    global $conn;
+    $conn = openDbConn();
 
     $result = $conn->query("SELECT temperature, ts FROM temperature WHERE id = 1");
 
@@ -47,6 +46,8 @@ function get_temp()
     {
         echo "No temp in table<br>";
     }
+
+    $conn->close();
 }
 
 

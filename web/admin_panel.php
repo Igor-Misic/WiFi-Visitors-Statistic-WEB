@@ -6,6 +6,8 @@ include 'menu.php';
 include 'admin_functions.php';
 include 'login_form.php';
 
+$conn = openDbConn();
+
 // Get cURL resource
 $curl = curl_init();
 
